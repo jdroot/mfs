@@ -47,6 +47,11 @@ Possible Issues
 - Need to verify that mkfs.mfs works properly on larger directory structures and files
 - The directory listings need to be iterated twice, once to get the listings and once to stat every file/folder. This should be changed, but I need to investigate if it is even possible (it should be in theory).
 
+Future
+------
+- Clean up known issues and investigate possible issues
+- Split mfs in to multiple, better named files
+
 Contact
 -------
 If you have any questions or comments please contact me at jamesroot@gmail.com
