@@ -1,5 +1,5 @@
 obj-m := mfs.o
-ccflags-y := -DSIMPLEFS_DEBUG
+ccflags-y := -DMFS_DEBUG
 
 all: ko mkfs.mfs
 
