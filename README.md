@@ -25,7 +25,9 @@ File System Layout
 ------------------
 
 Block 0:       32 Byte Superblock + (Block Size - 32) bytes of padding
+
 Block 1-N:     Data blocks containing file data and directory listings
+
 Block (N+1)-M: Inode store
 
 All files are stored sequentially (zero fragmentation). This means that a file an exist with a single inode and based on the initial data block, block size, and read position it is possible to move to any position in the file.
