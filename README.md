@@ -2,6 +2,8 @@ mfs is a very simple read-only file system implementation for Linux based on htt
 
 This file system is meant as a learning tool for the reading half of Linux's virtual file system as well as some very basic file system design.
 
+Currently it is licensed under the MIT license. If anyone would like a different license, please contact me.
+
 Building/Running
 ----------------
 Assuming the linux kernel sources are installed, you should be able to just run make.
@@ -47,7 +49,7 @@ Possible Issues
 
 Contact
 -------
-If you have any questions or comments please contact me at JamesRoot@gmail.com
+If you have any questions or comments please contact me at jamesroot@gmail.com
 
 Credits
 -------
