@@ -262,14 +262,11 @@ uint64_t write_dir(int fd, struct mfs_inode *parent, uint64_t block_size, uint64
             fprintf(stderr, "Skipping '%s', filename too long.\n", full_name);
         }
     }
-
     parent->dir_children_count = count;
     parent->data_block_number = *blocks;
     rec = NULL;
     cur = dir_ents.head;
     dir_c = 0;
-
-    printf("Writing dir records for %s\n", path);
 
     //TODO: Free dirs
     while (cur != NULL) {
@@ -292,9 +289,9 @@ uint64_t write_dir(int fd, struct mfs_inode *parent, uint64_t block_size, uint64
         cur = cur->next;
     }
 
-    *blocks += MFS_RECORD_BLOCKS_NEEDED(block_size, dir_c);
+    *blocks += MFS_RECORD_BLOCKS_NEEDED(block_size, count);
 
-    if (dir_c < MFS_RECORDS_PER_BLOCK(block_size)) {
+    if (dir_c != 0) {
         pad(fd, block_size - (dir_c * MFS_RECORD_SIZE));
     }
 
@@ -315,8 +312,6 @@ uint64_t write_fs(int fd, uint64_t block_size, const char* root_path) {
 
     write_dir(fd, inode, block_size, &blocks, root_path);
 
-    printf("Got %llu blocks\n", blocks);
-
     cur = inodes_head;
     //TODO: Free inodes?
     while (cur != NULL) {
@@ -324,8 +319,8 @@ uint64_t write_fs(int fd, uint64_t block_size, const char* root_path) {
         count++;
         cur = cur->next;
 
-        printf("Writing inode %llu\n", inode->inode_no);
-        printf("Inode datablock: %llu\n", inode->data_block_number);
+        // printf("Writing inode %llu\n", inode->inode_no);
+        // printf("Inode datablock: %llu\n", inode->data_block_number);
 
         rv = write(fd, inode, MFS_INODE_SIZE);
 
@@ -355,7 +350,7 @@ int main(int argc, char** argv) {
 
     const char * input_path = argv[1];
     const char * output_path = argv[2];
-    uint64_t block_size = 4096;
+    uint64_t block_size = 512;
 
     uint64_t c = 0;
     int fd;
